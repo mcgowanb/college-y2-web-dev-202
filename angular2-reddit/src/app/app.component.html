@@ -4,12 +4,17 @@
   </h3>
   <div class="field">
     <label for="title">Title</label>
-    <input name="title" id="title" #newtitle>
+    <input name="title" id="title" #title>
   </div>
   <div class="field">
     <label for="link">Link</label>
-    <input name="link" id="link" #newlink>
+    <input name="link" id="link" #link>
   </div>
 
-  <button class="ui positive right floated button" (click)="addArticle(newtitle, newlink)">Submit Link</button>
+  <button class="ui positive right floated button" (click)="addArticle(title, newlink)">Submit Link</button>
 </form>
+<div class="ui grid posts">
+  <app-article>
+
+  </app-article>
+</div>
