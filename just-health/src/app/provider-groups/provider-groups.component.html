@@ -1,3 +1,10 @@
-<p>
-  provider-groups works!
-</p>
+<fieldset>
+  <legend>
+    <h2 class="ui header">Service Types</h2>
+  </legend>
+  <div class="checkbox">
+    <label><input type="checkbox" name="select-all" id="all" (change)="checkAll($event)"> Select All</label>
+  </div>
+  <app-provider-row *ngFor="let p of providerList" (change)='clicked(p)' [provider]="p">
+  </app-provider-row>
+</fieldset>

@@ -5,9 +5,8 @@ import { ProviderGroup } from '../provider-group';
   selector: 'app-provider-row',
   inputs: ['provider'],
   template: `
-  <div class="ui fluid checkbox">
-    <input type="checkbox" name="example" id={{provider.name}} [(ngModel)]="provider.checked">
-    <label for={{provider.name}}>{{provider.name}}</label>
+      <div class="checkbox">
+    <label><input type="checkbox" name="{{provider.name}}" id={{provider.name}} [(ngModel)]="provider.checked">{{provider.name}}</label>
   </div>
  `,
   styleUrls: ['./provider-row.component.css']
