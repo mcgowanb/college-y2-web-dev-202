@@ -20,15 +20,18 @@ import { ProviderGroup } from '../provider-group';
   `,
   styleUrls: ['./provider-groups.component.css'],
   inputs: ['providerList'],
-  outputs: ['onBoxChanged']
+  outputs: ['onBoxChanged', 'selectAll']
 })
 export class ProviderGroupsComponent implements OnInit {
   providerList: ProviderGroup[];
 
   onBoxChanged: EventEmitter<ProviderGroup>;
+  selectAll: EventEmitter<ProviderGroup[]>;
   private cGroup: ProviderGroup;
-  constructor() { 
+
+  constructor() {
     this.onBoxChanged = new EventEmitter();
+    this.selectAll = new EventEmitter();
   }
 
   clicked(pGroup: ProviderGroup): void {
@@ -36,8 +39,9 @@ export class ProviderGroupsComponent implements OnInit {
     this.onBoxChanged.emit(pGroup);
   }
 
-  checkAll(ev): void{ 
-     this.providerList.forEach(x => x.checked = ev.target.checked)
+  checkAll(ev): void {
+    this.providerList.forEach(x => x.checked = ev.target.checked)
+    this.selectAll.emit(this.providerList);
   }
 
   ngOnInit() {

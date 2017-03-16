@@ -10,7 +10,7 @@ import {ProviderGroup} from '../provider-group';
     </div>
     <div class="four wide column">
       <app-provider-groups [providerList]="providers"
-    (onBoxChanged)="onBoxChanged($event)"></app-provider-groups>
+    (onBoxChanged)="onBoxChanged($event)" (selectAll)="selectAll($event)"></app-provider-groups>
     </div>
     <div class="twelve wide column">
       <app-service-provider></app-service-provider>
@@ -22,12 +22,12 @@ export class MainPageComponent implements OnInit {
 providers : ProviderGroup[];
  constructor() {
     this.providers = [
-      new ProviderGroup("Mental Health afsfs fs"),
-      new ProviderGroup("Speech Therap sdad"),
-      new ProviderGroup("Autism Support"),
-      new ProviderGroup("Paediatric Services"),
-      new ProviderGroup("Something Else"),
-      new ProviderGroup("Something else as well"),
+      new ProviderGroup("Mental Health afsfs fs", 1),
+      new ProviderGroup("Speech Therap sdad", 2),
+      new ProviderGroup("Autism Support", 3),
+      new ProviderGroup("Paediatric Services", 4),
+      new ProviderGroup("Something Else", 5),
+      new ProviderGroup("Something else as well", 6),
     ]
    }
 
@@ -36,6 +36,10 @@ providers : ProviderGroup[];
 
   onBoxChanged(provider: ProviderGroup){
     console.log("Box was changed: ", provider);
+  }
+
+  selectAll(providers: ProviderGroup[]){
+      console.log("all was selected", providers);
   }
 
 }
