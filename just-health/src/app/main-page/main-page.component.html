@@ -1,0 +1,15 @@
+<div class="ui stackable doubling grid">
+    <div class="sixteen wide column">
+        <app-menu></app-menu>
+    </div>
+    <div class="four wide column">
+        <app-provider-groups 
+            [providerList]="providers" 
+            (onBoxChanged)="onBoxChanged($event)" 
+            (selectAll)="selectAll($event)"
+        ></app-provider-groups>
+    </div>
+    <div class="twelve wide column">
+        <app-service-provider></app-service-provider>
+    </div>
+</div>

@@ -4,18 +4,17 @@ import {ProviderGroup} from '../provider-group';
 @Component({
   selector: 'app-main-page',
   template: `
-  <div class="ui stackable doubling grid">
-    <div class="sixteen wide column">
-      <app-menu></app-menu>
-    </div>
+  
     <div class="four wide column">
-      <app-provider-groups [providerList]="providers"
-    (onBoxChanged)="onBoxChanged($event)" (selectAll)="selectAll($event)"></app-provider-groups>
+        <app-provider-groups 
+            [providerList]="providers" 
+            (onBoxChanged)="onBoxChanged($event)" 
+            (selectAll)="selectAll($event)"
+        ></app-provider-groups>
     </div>
     <div class="twelve wide column">
-      <app-service-provider></app-service-provider>
-    </div>
-  </div>`,
+        <app-service-provider></app-service-provider>
+    </div>`,
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit {
