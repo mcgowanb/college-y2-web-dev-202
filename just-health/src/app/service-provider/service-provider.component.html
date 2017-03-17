@@ -15,5 +15,6 @@
   </div>
 </div>
 <div class="row">
-
+  <app-service-provider-row *ngFor="let s of serviceProviderList" [service]="s">
+  </app-service-provider-row>
 </div>

@@ -4,12 +4,14 @@ export class ServiceProvider {
     public imageUrl: string;
     public providerGroups: string[];
     public rating: number;
+    public maxRating: number;
 
-    constructor(name, details, imageUrl) {
+    constructor(name, details, imageUrl, rating) {
         this.name = name;
         this.details = details;
         this.imageUrl = imageUrl;
-        this.rating = 4;
+        this.rating = rating;
         this.providerGroups = ["gp one", "gp two", "gp three"];
+        this.maxRating = 5;
     }
 }

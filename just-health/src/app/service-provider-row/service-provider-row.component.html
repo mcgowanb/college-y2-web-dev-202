@@ -1,3 +1,15 @@
-<p>
-  service-provider-row works!
-</p>
+<div class="row service-provider">
+  <div class="col-lg-3">
+     <a class="thumbnail">
+      <img src="{{service.imageUrl}}" alt="{{service.name}}">
+    </a>
+  </div>
+  <div class="col-lg-6">
+    <h3>{{service.name}}</h3>
+    <p>{{service.details}}</p>
+  </div>
+  <div class="col-lg-3">
+    <h3>Rating</h3>
+    <span *ngFor="let i of arr(fullS).fill(1)" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+  </div>
+</div>
