@@ -6,9 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ServiceProviderComponent } from './service-provider/service-provider.component';
 import { ServiceProviderRowComponent } from './service-provider-row/service-provider-row.component';
-import { ServiceProviderImageComponent } from './service-provider-image/service-provider-image.component';
-import { ServiceProviderDetailsComponent } from './service-provider-details/service-provider-details.component';
-import { ServiceProviderRatingComponent } from './service-provider-rating/service-provider-rating.component';
 import { ServiceProviderGroupsComponent } from './service-provider-groups/service-provider-groups.component';
 import { ProviderGroupsComponent } from './provider-groups/provider-groups.component';
 import { MenuComponent } from './menu/menu.component';
@@ -29,9 +26,6 @@ const routes: Routes = [
     AppComponent,
     ServiceProviderComponent,
     ServiceProviderRowComponent,
-    ServiceProviderImageComponent,
-    ServiceProviderDetailsComponent,
-    ServiceProviderRatingComponent,
     ServiceProviderGroupsComponent,
     ProviderGroupsComponent,
     MenuComponent,

@@ -15,7 +15,7 @@ import { ServiceProvider } from '../service-provider';
     </div>
     <div class="col-lg-9">
     <app-service-provider
-      [serviceProviderList]="serviceProviders">
+      [serviceProviderList]="serviceProviders" (sortList)="filterList($event)">
     </app-service-provider>
     </div>
 </div>`,
@@ -35,21 +35,21 @@ export class MainPageComponent implements OnInit {
     ];
 
     this.serviceProviders = [
-      new ServiceProvider("Dr Zeuss", 
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.", 
-      "./assets/images/doctor-1.png", 5),
-      new ServiceProvider("Dr Heartman", 
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.", 
-      "./assets/images/doctor-2.png", 3),
-       new ServiceProvider("Dr Whiner", 
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.", 
-      "./assets/images/doctor-3.png", 4),
-       new ServiceProvider("Dr B.J. Hardick", 
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.", 
-      "./assets/images/doctor-4.png", 2),
-       new ServiceProvider("Patch Adams", 
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.", 
-      "./assets/images/doctor-1.png", 3),
+      new ServiceProvider("Dr Zeuss",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        "./assets/images/doctor-1.png", 5),
+      new ServiceProvider("Dr Heartman",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        "./assets/images/doctor-2.png", 3),
+      new ServiceProvider("Dr Whiner",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        "./assets/images/doctor-3.png", 4),
+      new ServiceProvider("Dr B.J. Hardick",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        "./assets/images/doctor-4.png", 2),
+      new ServiceProvider("Patch Adams",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        "./assets/images/doctor-1.png", 3),
     ]
   }
 
@@ -62,6 +62,29 @@ export class MainPageComponent implements OnInit {
 
   selectAll(providers: ProviderGroup[]) {
     console.log("all was selected", providers);
+  }
+
+  filterList(filter: String): void {
+    switch (filter) {
+      case "h":
+        this.serviceProviders = this.serviceProviders.sort((a: any, b: any) => {
+          if (a.rating < b.rating) {
+            return 1;
+          }
+          else return 0;
+        });
+        break;
+      case "l":
+        this.serviceProviders = this.serviceProviders.sort((a: any, b: any) => {
+          if (a.rating > b.rating) {
+            return 1;
+          }
+          else return 0;
+        });
+        break;
+      case "d":
+        break;
+    }
   }
 
 }
