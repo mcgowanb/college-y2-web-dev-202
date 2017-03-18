@@ -9,7 +9,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
     <form class="form-horizontal">
       <div class="form-group">
         <label for="filter" class="col-sm-4 control-label">Sort By</label>
-        <div class="col-sm-8">
+        <div class="col-sm-8 input-group-sm">
           <select class="form-control" id="filter" (change)="filter($event.target.value)">
           <option value="d">Best Match</option>
           <option value="h">Rating High-Low</option>
