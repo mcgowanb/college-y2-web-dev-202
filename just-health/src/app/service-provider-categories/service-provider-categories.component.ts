@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   inputs: ['service'],
   template: `
  <div>
-  <span *ngFor="let name of service.providerGroups; let i=index">
-  <a>{{name}}</a><span>{{i < (service.providerGroups.length-1) ? ' | ' : ''}}</span>
+  <span *ngFor="let group of service.providerGroups; let i=index">
+  <a>{{group.name}}</a><span>{{i < (service.providerGroups.length-1) ? ' | ' : ''}}</span>
   </span>
 </div>
   `
