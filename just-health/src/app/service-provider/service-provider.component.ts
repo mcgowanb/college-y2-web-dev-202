@@ -4,7 +4,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
   selector: 'app-service-provider',
   // templateUrl: './service-provider.component.html',
   template: `
-    <div class="row">
+<div class="row">
   <div class="col-lg-4 col-lg-offset-8">
     <form class="form-horizontal">
       <div class="form-group">

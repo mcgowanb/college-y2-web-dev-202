@@ -13,6 +13,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { ProviderRowComponent } from './provider-row/provider-row.component';
 import { HelpComponent } from './help/help.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { ServiceProviderCategoriesComponent } from './service-provider-categories/service-provider-categories.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -32,6 +33,7 @@ const routes: Routes = [
     MainPageComponent,
     ProviderRowComponent,
     HelpComponent,
+    ServiceProviderCategoriesComponent,
   ],
   imports: [
     BrowserModule,

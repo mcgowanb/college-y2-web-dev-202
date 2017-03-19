@@ -1,0 +1,5 @@
+<div>
+  <span *ngFor="let name of service.providerGroups; let i=index">
+  <a>{{name}}</a><span>{{i < (service.providerGroups.length-1) ? ' | ' : ''}}</span>
+  </span>
+</div>

@@ -13,6 +13,7 @@ import { ServiceProvider } from '../service-provider';
   <div class="col-lg-6">
     <h3>{{service.name}}</h3>
     <p>{{service.details}}</p>
+    <app-service-provider-categories [service]="service"></app-service-provider-categories>
   </div>
   <div class="col-lg-3">
     <span *ngFor="let i of arr(fullStars).fill(1)" class="glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -25,7 +26,6 @@ import { ServiceProvider } from '../service-provider';
 })
 export class ServiceProviderRowComponent implements OnInit {
   @Input() service: ServiceProvider;
-  sp: ServiceProvider;
   arr = Array;
   fullStars: number;
   emptyStars: number;
