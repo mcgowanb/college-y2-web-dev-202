@@ -24,6 +24,7 @@ import { ServiceProvider } from '../service-provider';
 export class MainPageComponent implements OnInit {
   providers: ProviderGroup[];
   serviceProviders: ServiceProvider[];
+  absServices: ServiceProvider[];
   constructor() {
     this.providers = [
       new ProviderGroup("Mental Health", 1),
@@ -34,7 +35,7 @@ export class MainPageComponent implements OnInit {
       new ProviderGroup("Something else as well", 6)
     ];
 
-    this.serviceProviders = [
+    this.serviceProviders = this.absServices = [
       new ServiceProvider("Dr Zeuss",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
         "./assets/images/doctor-1.png", 5, [
@@ -81,10 +82,52 @@ export class MainPageComponent implements OnInit {
   }
 
   onBoxChanged(provider: ProviderGroup) {
-    console.log("Box was changed: ", provider);
+    switch (provider.id) {
+      case 1:
+        if(provider.checked){
+            this.serviceProviders = [
+              new ServiceProvider("Dr Zeuss",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        "./assets/images/doctor-1.png", 5, [
+          new ProviderGroup("Mental Health", 1),
+          new ProviderGroup("Speech Therapy", 2),
+          new ProviderGroup("Something else as well", 6)]
+      ),
+      new ServiceProvider("Dr B.J. Hardick",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        "./assets/images/doctor-4.png", 2, [
+          new ProviderGroup("Mental Health", 1),
+          new ProviderGroup("Speech Therapy", 2),
+          new ProviderGroup("Autism Support", 3),
+          new ProviderGroup("Paediatric Services", 4),
+          new ProviderGroup("Acute Care Services", 5),
+          new ProviderGroup("Something else as well", 6)
+        ]),
+      new ServiceProvider("Patch Adams",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        "./assets/images/doctor-1.png", 3, [
+          new ProviderGroup("Mental Health", 1),
+          new ProviderGroup("Speech Therapy", 2),
+          new ProviderGroup("Autism Support", 3),
+          new ProviderGroup("Paediatric Services", 4),
+          new ProviderGroup("Acute Care Services", 5),
+          new ProviderGroup("Something else as well", 6)
+        ]),
+            ];
+        }
+        else{
+            
+        }
+        break;
+    }
+    // console.log("Box was changed: ", provider);
+
   }
 
+
+
   selectAll(providers: ProviderGroup[]) {
+    // this.serviceProviders = null;
     console.log("all was selected", providers);
   }
 
