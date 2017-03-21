@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProviderGroup } from '../provider-group';
 import { ServiceProvider } from '../service-provider';
+import { SortOptions } from '../sort-options';
 
 @Component({
   selector: 'app-main-page',
@@ -15,7 +16,7 @@ import { ServiceProvider } from '../service-provider';
     </div>
     <div class="col-lg-9">
     <app-service-provider
-      [serviceProviderList]="serviceProviders" (sortList)="orderListChanged($event)">
+      [serviceProviderList]="serviceProviders" [sortOptions]="sortOptions" (sortList)="orderListChanged($event)">
     </app-service-provider>
     </div>
 </div>`,
@@ -27,6 +28,7 @@ export class MainPageComponent implements OnInit {
   serviceProviders: ServiceProvider[];
   absServices: ServiceProvider[];
   filterIdx: String;
+  sortOptions: SortOptions[];
   constructor() {
     this.providers = [
       new ProviderGroup("Mental Health", 1),
@@ -37,6 +39,11 @@ export class MainPageComponent implements OnInit {
       new ProviderGroup("Something else as well", 6)
     ];
 
+    this.sortOptions = [
+      new SortOptions("d", "Best Match"),
+      new SortOptions("h", "Rating High-Low"),
+      new SortOptions("l", "Rating Low-High"),
+    ];
 
     this.serviceProviders = [
       new ServiceProvider("Dr Nick Riviera",

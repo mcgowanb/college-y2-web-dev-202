@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-service-provider',
-  // templateUrl: './service-provider.component.html',
   template: `
 <div class="row">
   <div class="col-lg-4 col-lg-offset-8">
@@ -10,10 +9,8 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
       <div class="form-group">
         <label for="filter" class="col-sm-4 control-label">Sort By</label>
         <div class="col-sm-8 input-group-sm">
-          <select class="form-control" id="filter" (change)="filter($event.target.value)">
-          <option value="d">Best Match</option>
-          <option value="h">Rating High-Low</option>
-          <option value="l">Rating Low-High</option>
+          <select class="form-control" id="filter"(change)="filter($event.target.value)">
+          <option *ngFor="let option of sortOptions" value={{option.key}}>{{option.value}}</option>
         </select>
         </div>
       </div>
@@ -26,7 +23,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 </div>
   `,
   styleUrls: ['./service-provider.component.css'],
-  inputs: ['serviceProviderList'],
+  inputs: ['serviceProviderList', 'sortOptions'],
   outputs: ['sortList']
 })
 export class ServiceProviderComponent implements OnInit {
