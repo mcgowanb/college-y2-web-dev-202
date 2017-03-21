@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-service-provider-categories',
-  // templateUrl: './service-provider-categories.component.html',
   styleUrls: ['./service-provider-categories.component.css'],
   inputs: ['service'],
   template: `
