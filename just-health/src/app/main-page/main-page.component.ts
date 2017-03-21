@@ -15,7 +15,7 @@ import { ServiceProvider } from '../service-provider';
     </div>
     <div class="col-lg-9">
     <app-service-provider
-      [serviceProviderList]="serviceProviders" (sortList)="filterList($event)">
+      [serviceProviderList]="serviceProviders" (sortList)="orderListChanged($event)">
     </app-service-provider>
     </div>
 </div>`,
@@ -23,8 +23,10 @@ import { ServiceProvider } from '../service-provider';
 })
 export class MainPageComponent implements OnInit {
   providers: ProviderGroup[];
+  checkedProviders: ProviderGroup[];
   serviceProviders: ServiceProvider[];
   absServices: ServiceProvider[];
+  filterIdx: String;
   constructor() {
     this.providers = [
       new ProviderGroup("Mental Health", 1),
@@ -35,7 +37,8 @@ export class MainPageComponent implements OnInit {
       new ProviderGroup("Something else as well", 6)
     ];
 
-    this.serviceProviders = this.absServices = [
+
+    this.serviceProviders = [
       new ServiceProvider("Dr Zeuss",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
         "./assets/images/doctor-1.png", 5, [
@@ -58,7 +61,6 @@ export class MainPageComponent implements OnInit {
       new ServiceProvider("Dr B.J. Hardick",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
         "./assets/images/doctor-4.png", 2, [
-          new ProviderGroup("Mental Health", 1),
           new ProviderGroup("Speech Therapy", 2),
           new ProviderGroup("Autism Support", 3),
           new ProviderGroup("Paediatric Services", 4),
@@ -75,66 +77,76 @@ export class MainPageComponent implements OnInit {
           new ProviderGroup("Acute Care Services", 5),
           new ProviderGroup("Something else as well", 6)
         ]),
-    ]
+    ],
+
+      this.filterIdx = "d";
   }
 
+  //create checklist & filtered service provider list
   ngOnInit() {
+    this.checkedProviders = Array.from(this.providers);
+    this.absServices = Array.from(this.serviceProviders);
   }
 
+  //on check either add or remove item from the array of checked providers
   onBoxChanged(provider: ProviderGroup) {
-    switch (provider.id) {
-      case 1:
-        if(provider.checked){
-            this.serviceProviders = [
-              new ServiceProvider("Dr Zeuss",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
-        "./assets/images/doctor-1.png", 5, [
-          new ProviderGroup("Mental Health", 1),
-          new ProviderGroup("Speech Therapy", 2),
-          new ProviderGroup("Something else as well", 6)]
-      ),
-      new ServiceProvider("Dr B.J. Hardick",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
-        "./assets/images/doctor-4.png", 2, [
-          new ProviderGroup("Mental Health", 1),
-          new ProviderGroup("Speech Therapy", 2),
-          new ProviderGroup("Autism Support", 3),
-          new ProviderGroup("Paediatric Services", 4),
-          new ProviderGroup("Acute Care Services", 5),
-          new ProviderGroup("Something else as well", 6)
-        ]),
-      new ServiceProvider("Patch Adams",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
-        "./assets/images/doctor-1.png", 3, [
-          new ProviderGroup("Mental Health", 1),
-          new ProviderGroup("Speech Therapy", 2),
-          new ProviderGroup("Autism Support", 3),
-          new ProviderGroup("Paediatric Services", 4),
-          new ProviderGroup("Acute Care Services", 5),
-          new ProviderGroup("Something else as well", 6)
-        ]),
-            ];
-        }
-        else{
-            
-        }
-        break;
+    if (provider.checked) {
+      this.checkedProviders.push(provider);
     }
-    // console.log("Box was changed: ", provider);
+    else {
+      var idx = this.checkedProviders.indexOf(provider);
+      if (idx > -1)
+        this.checkedProviders.splice(idx, 1);
+    }
+    this.filterList();
+  }
 
+  /**
+   * filters the list of services providers based on check boxes. if not already added to the list 
+   * they will be added. sanity check to prevent duplicates
+   */
+  private filterList(): void {
+    this.serviceProviders = new Array;
+    for (let i of this.checkedProviders) {
+      for (let entry of this.absServices) {
+        if (
+          entry.providerGroups.some(x => x.id == i.id)
+          && (this.serviceProviders.indexOf(entry) == -1)
+        ) {
+          this.serviceProviders.push(entry);
+        }
+      }
+    }
+    this.orderList();
   }
 
 
-
-  selectAll(providers: ProviderGroup[]) {
-    // this.serviceProviders = null;
-    console.log("all was selected", providers);
+  //all providers are checekd
+  selectAll(checked: boolean) {
+    if (checked) {
+      this.serviceProviders = this.absServices;
+      this.checkedProviders = this.providers;
+      this.orderList();
+    }
+    else {
+      this.serviceProviders = new Array;
+      this.checkedProviders = new Array;
+    }
   }
 
-  filterList(filter: String): void {
-    switch (filter) {
+  /**
+   * Listener for order list box change emitter
+   * @param 
+   */
+  orderListChanged(filter: String): void {
+    this.filterIdx = filter;
+    this.orderList();
+  }
+
+  private orderList(): void {
+    switch (this.filterIdx) {
       case "h":
-        this.serviceProviders = this.serviceProviders.sort((a: any, b: any) => {
+        this.serviceProviders.sort((a: any, b: any) => {
           if (a.rating < b.rating) {
             return 1;
           }
@@ -142,7 +154,7 @@ export class MainPageComponent implements OnInit {
         });
         break;
       case "l":
-        this.serviceProviders = this.serviceProviders.sort((a: any, b: any) => {
+        this.serviceProviders.sort((a: any, b: any) => {
           if (a.rating > b.rating) {
             return 1;
           }

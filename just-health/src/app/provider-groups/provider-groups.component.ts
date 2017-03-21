@@ -13,7 +13,7 @@ export class ProviderGroupsComponent implements OnInit {
   providerList: ProviderGroup[];
 
   onBoxChanged: EventEmitter<ProviderGroup>;
-  selectAll: EventEmitter<ProviderGroup[]>;
+  selectAll: EventEmitter<boolean>;
   private cGroup: ProviderGroup;
 
   constructor() {
@@ -28,7 +28,7 @@ export class ProviderGroupsComponent implements OnInit {
 
   checkAll(ev): void {
     this.providerList.forEach(x => x.checked = ev.target.checked)
-    this.selectAll.emit(this.providerList);
+    this.selectAll.emit(ev.target.checked);
   }
 
   ngOnInit() {

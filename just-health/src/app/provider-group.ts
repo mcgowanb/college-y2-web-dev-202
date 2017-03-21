@@ -5,7 +5,7 @@ export class ProviderGroup{
     constructor(name, id)
     {
         this.name = name;
-        this.checked = false;
+        this.checked = true;
         this.id = id;
     }
 
