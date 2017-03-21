@@ -6,7 +6,7 @@ import { ServiceProvider } from '../service-provider';
   template: `
   <div class="row service-provider">
   <div class="col-lg-3">
-     <a class="thumbnail">
+     <a class="thumbnail" href={{service.imageUrl}} data-lightbox="image" data-title={{service.name}}>
       <img src="{{service.imageUrl}}" alt="{{service.name}}" title="{{service.name}}">
     </a>
   </div>

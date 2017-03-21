@@ -39,9 +39,9 @@ export class MainPageComponent implements OnInit {
 
 
     this.serviceProviders = [
-      new ServiceProvider("Dr Zeuss",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis dui in libero finibus, non dictum nibh aliquet. Mauris eu dolor sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in lectus erat. Aenean finibus venenatis urna, eget fermentum augue sagittis at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
-        "./assets/images/doctor-1.png", 5, [
+      new ServiceProvider("Dr Nick Riviera",
+        "Dr. Nicholas Riviera M.D. is a quack physician who studied at dubious medical schools, although he claims to be \"just as good as Dr. Hibbert M.D.\". He is inventor of Juice Loosener and Sun & Run. Though seemingly killed in the Simpsons Movie by a giant shard of glass, he appears in several episodes after that and it was eventually confirmed by Al Jean that he had not died like many first thought.",
+        "./assets/images/doctor-nick.png", 5, [
           new ProviderGroup("Mental Health", 1),
           new ProviderGroup("Speech Therapy", 2),
           new ProviderGroup("Something else as well", 6)]
