@@ -11,7 +11,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 var connection = mysql.createConnection({
-    host: 'college-aws-db.cucaivb9nhjv.eu-west-1.rds.amazonaws.com',
+    host: 'rds-test-2.c2exmftaihrq.eu-west-1.rds.amazonaws.com',
     user: 'root',
     password: 'password'
 });
@@ -25,13 +25,13 @@ connection.connect(function (error) {
     }
 
 })
-connection.query('USE test');
+connection.query('USE wp2_exam');
 app.set('port', 3000);
 app.set('view engine', 'jade');
-var programmeName;
+var moduleName;
 
 app.get('/', function (req, res) {
-    connection.query('select programmeName from records where id=1', function (err, rows) {
+    connection.query('select module_name from module_info where module_id=1', function (err, rows) {
         if (!!err) {
             console.log('Error in the query');
         }
@@ -39,9 +39,9 @@ app.get('/', function (req, res) {
             console.log('Successful query');
             console.log(rows);
         }
-        programmeName = rows[0]['programmeName'];
-        console.log("programmeName: " + programmeName);
-        res.send(programmeName);
+        moduleName = rows[0]['module_name'];
+        console.log("moduleName" + moduleName);
+        res.send(moduleName);
     });
 
 });
